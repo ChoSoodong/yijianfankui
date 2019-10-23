@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self addBackButtonAndMiddleTitle:@"意见反馈" addBackBtn:YES isWhite:NO];
+    //意见反馈
     
     [self setupUI];
 }
