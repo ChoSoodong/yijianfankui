@@ -128,46 +128,7 @@
  意见反馈请求
  */
 -(void)loadFeedbackData{
-    
-    [self.confirmBtn showIndicator];
-    
-    SDLoginModel *loginModel = [SDFileTool getObjectByFileName:LOGIN_MODEL];
-    
-    NSDictionary *params = @{
-                             @"userId" : loginModel.id,
-                             @"content" : self.textView.text,
-                             @"contractType" : self.phoneTF.text
-                             };
-    
-    WeakSelf;
-    [NetWorkTool POSTWithURL:API_CommitFeedBack parameters:params cachePolicy:CachePolicyIgnoreCache callback:^(id responseObject, NSError *error) {
-        
-        if (error == nil) {
-            
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dict[@"result"] boolValue]) {
-                
-                [EasyHUD showSuccessText:dict[@"data"]];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
-                });
-                
-            }else{
-                
-                [EasyHUD showErrorText:dict[@"msg"]];
-                
-            }
-
-            [weakSelf.confirmBtn hideIndicator];
-        }else{
-            
-            [EasyHUD showErrorText:@"网络异常,请重试"];
-            [weakSelf.confirmBtn hideIndicator];
-        }
- 
-    }];
+   
     
 }
 
